@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 
             $conn = mysqli_connect('mariadb', 'root', 'password', 'tools4ever');
 
-            $sql = "SELECT * FROM users WHERE email='$emailForm'";
+            $sql = "SELECT * FROM users LEFT JOIN user_settings ON user_settings.user_id = users.id WHERE users.email='$emailForm'";
             $result = mysqli_query($conn, $sql);
 
             //als de email bestaat dan is het resultaat groter dan 0
@@ -25,6 +25,7 @@ if (isset($_POST['submit'])) {
                     $_SESSION['firstname']  = $dbuser['firstname'];
                     $_SESSION['lastname']   = $dbuser['lastname'];
                     $_SESSION['role']       = $dbuser['role'];
+                    $_SESSION['backgroundColor'] = $dbuser['backgroundColor'];
 
                     // echo "You are logged in";
                     header("Location: dashboard.php");
