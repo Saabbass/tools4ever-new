@@ -28,19 +28,22 @@ require 'database.php';
 
 $sql = [];
 $query = "SELECT COUNT(id) AS total FROM users";
-$result = mysqli_query($conn, $query);
-$users = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$users = $stmt->fetch(PDO::FETCH_ASSOC);
 
 array_push($sql, $query);
 
 $query = "SELECT COUNT(id) AS total FROM users WHERE role = 'employee'";
-$result = mysqli_query($conn, $query);
-$employees = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$employees = $stmt->fetch(PDO::FETCH_ASSOC);
 array_push($sql, $query);
 
 $query = "SELECT COUNT(tool_id) AS total FROM tools";
-$result = mysqli_query($conn, $query);
-$tools = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$tools = $stmt->fetch(PDO::FETCH_ASSOC);
 array_push($sql, $query);
 
 

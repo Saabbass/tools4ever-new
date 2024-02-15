@@ -4,10 +4,15 @@ session_start();
 require 'database.php';
 
 if (isset($_GET['id'])) {
-    $tool_id = $_GET['id'];
-    $sql = "SELECT * FROM tools WHERE tool_id = $tool_id";
-    $result = mysqli_query($conn, $sql);
-    $tool = mysqli_fetch_assoc($result);
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM tools WHERE tool_id = :tool_id";
+    
+    // $result = mysqli_query($conn, $sql);
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":tool_id", $id);
+    $stmt->execute();
+    $tool = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 require 'header.php';
 ?>

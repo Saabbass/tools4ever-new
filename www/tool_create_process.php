@@ -30,7 +30,9 @@ $image = $_POST['image'];
 
 
 $sql = "INSERT INTO tools (tool_name, tool_category, tool_price, tool_brand, tool_image) VALUES ('$name', '$category', '$price', '$brand', '$image')";
-$result = mysqli_query($conn, $sql);
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($result) {
     header("Location: tool_index.php");
