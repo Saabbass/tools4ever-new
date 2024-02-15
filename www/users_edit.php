@@ -22,7 +22,7 @@ require 'header.php';
  
 <main>
     <div class="container">
-        <form action="users_add_process.php" method="post">
+        <form action="users_update.php?id=<?php echo $_GET['id'] ?>" method="post">
             <div>
                 <label for="firstname">Voornaam:</label>
                 <input type="text" id="firstname" name="firstname">
